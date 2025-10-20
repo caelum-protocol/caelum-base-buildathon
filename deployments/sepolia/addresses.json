@@ -1,0 +1,9 @@
+{
+  "baseSepolia": {
+    "CAELUMToken": "0x43F8849E85eC2504DC0aACF0529E4324F65Ae856",
+    "BurnTracker": "0x732c9AB5EF6c94e668AcccBA7ac7781CBAe068a9",
+    "TierManager": "0xceBFc70a17d6e7c8Fba73229d1117dc49a8FB761",
+    "CaelumSBT": "0xEeB41a46d1Cd1F26c8A65eF9CEc0C8d7Aee0cfdC",
+    "ShardMinter": "0x645B5505535e7B0e65c517AD528aB87C509d8F2b"
+  }
+}
