@@ -1,0 +1,14 @@
+:root { --bg:#0b0f14; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --brand:#60a5fa; }
+html,body,#__next { height:100%; }
+body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif; background:var(--bg); color:var(--text); }
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+.hero { margin: 40px 0 24px; }
+.kicker { color: var(--muted); margin-top: 6px; }
+.card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.06); }
+.list { display:grid; gap:12px; margin: 18px 0 0; }
+.link { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-radius:10px; background:#0f172a; border:1px solid rgba(255,255,255,0.06); }
+.link small { color:var(--muted); }
+.footer { margin-top: 36px; color: var(--muted); }
+.badge { font-size:12px; padding:3px 8px; border-radius:999px; background:rgba(96,165,250,.15); color:#93c5fd; border:1px solid rgba(147,197,253,.25); }
