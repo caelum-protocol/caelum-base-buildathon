@@ -11,7 +11,7 @@ Live site: https://www.caelumprotocol.org
 
 Demo app (this repo): run locally with npm install && npm run dev (see below)
 
-60-sec video intro: https://youtu.be/2ko9CtgCwbI
+60-sec video intro: https://youtu.be/Jfx0PofgD-8
 
 🧠 What We’re Building
 
