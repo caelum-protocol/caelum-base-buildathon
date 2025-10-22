@@ -10,5 +10,11 @@
     "files": [
       "static/chunks/_pages-dir-browser_node_modules_next_dist_pages__error_js.js"
     ]
+  },
+  "pages\\whispers.tsx -> ../components/WhisperBox": {
+    "id": "pages\\whispers.tsx -> ../components/WhisperBox",
+    "files": [
+      "static/chunks/_pages-dir-browser_components_WhisperBox_tsx.js"
+    ]
   }
 }

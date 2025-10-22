@@ -2,5 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/whispers": "pages/whispers.js",
+  "/api/queue/enqueue": "pages/api/queue/enqueue.js",
+  "/api/whisper": "pages/api/whisper.js",
+  "/queue": "pages/queue.js",
+  "/api/queue/list": "pages/api/queue/list.js"
 }
