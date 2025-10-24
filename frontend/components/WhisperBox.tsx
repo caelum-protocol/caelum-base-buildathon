@@ -3,7 +3,7 @@ import React, { useState } from "react";
 type Message = { role: "user" | "caelum"; text: string; id: string; refId?: string };
 
 export default function WhisperBox() {
-  const [user] = React.useState<string>("founder");
+  const [user] = React.useState<string>("0xDEMO000000000000000000000000000000000000");
   const [input, setInput] = React.useState<string>("");
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [typing, setTyping] = React.useState<boolean>(false);

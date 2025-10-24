@@ -28,6 +28,13 @@ const filtered = items.filter((i) => {
   return true;
 });
 
+async function mintNow() {
+  const res = await fetch("/api/mint-from-queue", { method: "POST" });
+  const json = await res.json();
+  if (!json.ok) alert(json.error ?? "Mint failed");
+  load();
+}
+
 async function setQueued(id: string, queued: boolean) {
   await fetch("/api/queue/enqueue", {
     method: "POST",
@@ -44,6 +51,7 @@ return (
       <button className={`px-3 py-1 rounded border ${filter==='all'?'font-bold':''}`} onClick={() => setFilter("all")}>All</button>
       <button className={`px-3 py-1 rounded border ${filter==='candidates'?'font-bold':''}`} onClick={() => setFilter("candidates")}>Candidates ≥72%</button>
       <button className={`px-3 py-1 rounded border ${filter==='queued'?'font-bold':''}`} onClick={() => setFilter("queued")}>Queued</button>
+      <button className="px-3 py-1 rounded border" onClick={mintNow}>🚀 Mint next queued</button>
     </div>
 
     <ul className="space-y-3">
