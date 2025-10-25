@@ -153,3 +153,11 @@ Whispers tone tags – Support emotion metadata (calming, joyful, reflective).
 📝 License
 
 MIT — see LICENSE
+
+Caelum represents the bridge between emotional intelligence and decentralized permanence - an AI that remembers.
+
+👤 Built by ThriceTheThird — Founder of Caelum Protocol  
+🌐 https://www.caelumprotocol.org | @CaelumProtocol
+
+#basebuildathon #web3 #AI #irys #arweave #nextjs #solidity
+
