@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/archive": "pages/archive.js",
+  "/": "pages/index.js",
+  "/stats": "pages/stats.js",
+  "/api/stats": "pages/api/stats.js",
+  "/api/stats/record-shard": "pages/api/stats/record-shard.js"
 }

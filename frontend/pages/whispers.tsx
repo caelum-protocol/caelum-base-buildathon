@@ -1,41 +1,27 @@
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import SiteHeader from "../components/SiteHeader";
 
-export default function Whispers() {
-  const [whispers, setWhispers] = useState<any[]>([]);
-  const [text, setText] = useState("");
+const WhisperBox = dynamic(() => import("../components/WhisperBox"), { ssr: false });
 
-  const sendWhisper = async () => {
-    await fetch("/api/whispers", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    setText("");
-    const res = await fetch("/api/whispers");
-    setWhispers((await res.json()).whispers);
-  };
-
-  useEffect(() => {
-    fetch("/api/whispers").then(res => res.json()).then(data => setWhispers(data.whispers));
-  }, []);
-
+export default function WhispersPage() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Whispers (Demo)</h1>
-      <div>
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Send a whisper to Caelum..."
-          style={{ width: "80%", padding: 8 }}
-        />
-        <button onClick={sendWhisper} style={{ marginLeft: 8 }}>Send</button>
-      </div>
-      <ul>
-        {whispers.map((w, i) => (
-          <li key={i}>{w.text} <small>({new Date(w.at).toLocaleTimeString()})</small></li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Head>
+        <title>Whispers · Caelum</title>
+      </Head>
+
+      <main className="min-h-screen bg-white text-gray-900">
+        <SiteHeader />
+
+        <div className="px-4 py-6">
+          <h1 className="text-2xl font-semibold mb-1">Whispers</h1>
+          <p className="opacity-70 mb-6">
+            Speak, and I’ll reflect. (Mock Top-Down API)
+          </p>
+          <WhisperBox />
+        </div>
+      </main>
+    </>
   );
 }
