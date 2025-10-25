@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ApiResponse } from "@/lib/types";
 import { updateReflection, loadReflection } from "@/lib/storage";
-
+import { inc } from "@/lib/stats";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse<any>>) {
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Method not allowed" });
@@ -10,5 +10,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<ApiRes
   const exists = loadReflection(id);
   if (!exists) return res.status(404).json({ ok: false, error: "Reflection not found" });
   const updated = updateReflection(id, { queued });
+  inc("pofActions"); // 👈 toggle counts as a PoF action
   return res.status(200).json({ ok: true, data: updated });
 }

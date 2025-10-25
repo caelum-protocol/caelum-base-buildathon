@@ -2,6 +2,8 @@
 import Link from "next/link";
 
 export default function Home() {
+  const liveVaultUrl = process.env.NEXT_PUBLIC_LIVE_VAULT_URL || "https://www.caelumprotocol.org/vault";
+
   return (
     <div className="container">
       <header className="hero">
@@ -16,10 +18,11 @@ export default function Home() {
         </div>
 
         <div className="list">
-          <Link className="link" href="/vault">
+          {/* Open the LIVE vault */}
+          <a className="link" href={liveVaultUrl} target="_blank" rel="noopener noreferrer">
             <span>Open Vault <small>(Archive)</small></span>
-            <small>Browse memory shards →</small>
-          </Link>
+            <small>Browse memory shards ↗</small>
+          </a>
 
           <Link className="link" href="/whispers">
             <span>Whispers <small>(Alpha)</small></span>

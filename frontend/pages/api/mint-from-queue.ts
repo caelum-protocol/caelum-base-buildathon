@@ -1,16 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { listReflections, updateReflection } from "@/lib/storage";
 import { relayMint } from "@/lib/mintClient";
+import { inc } from "@/lib/stats"; // 👈 add this
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") return res.status(405).json({ ok:false, error:"Method not allowed" });
+  if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Method not allowed" });
 
   const endpoint = process.env.MINT_ENDPOINT_URL;
-  if (!endpoint) return res.status(500).json({ ok:false, error:"Missing MINT_ENDPOINT_URL" });
+  if (!endpoint) return res.status(500).json({ ok: false, error: "Missing MINT_ENDPOINT_URL" });
 
   const all = listReflections();
-  const next = all.find(r => (r as any).queued && !(r as any).minted);
-  if (!next) return res.status(200).json({ ok:true, data:null });
+  const next = all.find((r) => (r as any).queued && !(r as any).minted);
+  if (!next) return res.status(200).json({ ok: true, data: null });
 
   const wallet = next.meta.user || "0x0000000000000000000000000000000000000000";
   const txId = (next as any).arweaveTx ?? next.id;
@@ -23,8 +24,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     address: wallet,
   });
 
-  if (!resp.ok) return res.status(502).json({ ok:false, error: resp.error });
+  if (!resp.ok) return res.status(502).json({ ok: false, error: resp.error });
 
+  // success path: mark as minted and increment shards
   updateReflection(next.id, {
     minted: true,
     arweaveTx: txId,
@@ -32,14 +34,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     mintedAt: new Date().toISOString(),
   });
 
+  inc("shards"); // 👈 count a successful shard mint
+
   const mintHook = process.env.DISCORD_MINT_WEBHOOK_URL;
   if (mintHook) {
     fetch(mintHook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: `✅ Minted shard **${next.id}** → ${resp.txHash ?? "(tx pending)"}.` }),
+      body: JSON.stringify({
+        content: `✅ Minted shard **${next.id}** → ${resp.txHash ?? "(tx pending)"}.`,
+      }),
     }).catch(() => {});
   }
 
-  return res.status(200).json({ ok:true, data:{ id: next.id, txHash: resp.txHash } });
+  return res.status(200).json({ ok: true, data: { id: next.id, txHash: resp.txHash } });
 }
